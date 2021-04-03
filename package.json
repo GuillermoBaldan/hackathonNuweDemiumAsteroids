@@ -1,0 +1,26 @@
+{
+  "name": "hackathon-nuwe-demium-asteroids",
+  "version": "1.0.0",
+  "description": "Nuwe - Demium Hackathon Challenge over Asteroid Orbits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuillermoBaldan/hackathonNuweDemiumAsteroids.git"
+  },
+  "keywords": [
+    "API",
+    "CRUD",
+    "Node",
+    "Mongo",
+    "Asteroids"
+  ],
+  "author": "Guillermo Baldán López",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GuillermoBaldan/hackathonNuweDemiumAsteroids/issues"
+  },
+  "homepage": "https://github.com/GuillermoBaldan/hackathonNuweDemiumAsteroids#readme"
+}

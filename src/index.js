@@ -64,8 +64,18 @@ app.put('/api/asteroid/:name', (req, res) => {
 
 })
 
-app.delete('api/asteroid/:name', (req, res) => {
+app.delete('/api/asteroid/:asteroidId', (req, res) => {
+    let asteroidId = req.params.asteroidId
+    console.log(asteroidId)
 
+    Asteroids.findById(asteroidId, (err, asteroid) => {
+        if (err) return res.status(500).send({message: `Error al borrar el registro del asteroide: ${err}`})
+
+        asteroid.remove(err => {
+         if (err) return res.status(500).send({message: `Error al borrar el asteroide: ${err}`})
+         return res.status(200).send({message: "El asteroide ha sido eliminado"})
+        })
+    }) 
 })
 
 mongoose.connect('mongodb://localhost:27017/asteroids', (err, res) => {

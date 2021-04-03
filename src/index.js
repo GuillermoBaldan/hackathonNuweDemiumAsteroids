@@ -17,11 +17,24 @@ app.use(bodyParser.json())
 }) 
  */
 
-app.get('/api/asteroid',(req, res) => {
-res.send(200, {asteroids: []})
+app.get('/api/asteroids',(req, res) => {
+    Asteroids.find({}, (err, asteroids) => {
+        if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
+        if (!asteroids) return res.status(404).send({message: 'No existen asteroides'})
+
+        res.send(200, {asteroids})
+    })
 })
 
-app.get('/api/asteroid/:name',(req, res) => {
+app.get('/api/asteroid/:Id',(req, res) => {
+ let asteroidId = req.params.Id
+
+ Asteroids.findById(asteroidId, (err, asteroid) => {
+     if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
+     if (!asteroid) return res.status(404).send({message: `El asteroide no existe`})
+
+     res.status(200).send({ asteroid})
+    })
 
 })
 

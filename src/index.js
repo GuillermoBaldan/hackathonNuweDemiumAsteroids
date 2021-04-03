@@ -60,7 +60,15 @@ app.post('/api/asteroid', (req,res) => {
    })
 })
 
-app.put('/api/asteroid/:name', (req, res) => {
+app.put('/api/asteroid/:asteroidId', (req, res) => {
+    let asteroidId = req.params.asteroidId
+    let update = req.body
+
+    Asteroids.findByIdAndUpdate(asteroidId, update, (err, asteroidUpdated) => {
+        if (err) return res.status(500).send({ message: `Error al actualizar los parámetros del asteroide: ${err}`})
+        
+        res.status(200).send({ asteroid: asteroidUpdated })
+    })
 
 })
 

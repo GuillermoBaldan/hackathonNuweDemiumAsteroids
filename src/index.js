@@ -19,8 +19,8 @@ app.use(bodyParser.json())
 
 app.get('/api/asteroids',(req, res) => {
     Asteroids.find({}, (err, asteroids) => {
-        if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
-        if (!asteroids) return res.status(404).send({message: 'No existen asteroides'})
+        if (err) return res.status(500).send({message: `Request error: ${err}`})
+        if (!asteroids) return res.status(404).send({message: 'There is no asteroid in the records'})
 
         res.send(200, {asteroids})
     })
@@ -30,8 +30,8 @@ app.get('/api/asteroid/:Id',(req, res) => {
  let asteroidId = req.params.Id
 
  Asteroids.findById(asteroidId, (err, asteroid) => {
-     if (err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
-     if (!asteroid) return res.status(404).send({message: `El asteroide no existe`})
+     if (err) return res.status(500).send({message: `Request error: ${err}`})
+     if (!asteroid) return res.status(404).send({message: `The asteroid does not exist`})
 
      res.status(200).send({ asteroid})
     })
@@ -65,7 +65,7 @@ app.put('/api/asteroid/:asteroidId', (req, res) => {
     let update = req.body
 
     Asteroids.findByIdAndUpdate(asteroidId, update, (err, asteroidUpdated) => {
-        if (err) return res.status(500).send({ message: `Error al actualizar los parámetros del asteroide: ${err}`})
+        if (err) return res.status(500).send({ message: `Failed to update asteroid parameters: ${err}`})
         
         res.status(200).send({ asteroid: asteroidUpdated })
     })
@@ -77,11 +77,11 @@ app.delete('/api/asteroid/:asteroidId', (req, res) => {
     console.log(asteroidId)
 
     Asteroids.findById(asteroidId, (err, asteroid) => {
-        if (err) return res.status(500).send({message: `Error al borrar el registro del asteroide: ${err}`})
+        if (err) return res.status(500).send({message: `Failed to clear asteroid record: ${err}`})
 
         asteroid.remove(err => {
-         if (err) return res.status(500).send({message: `Error al borrar el asteroide: ${err}`})
-         return res.status(200).send({message: "El asteroide ha sido eliminado"})
+         if (err) return res.status(500).send({message: `Failed to clear asteroid record: ${err}`})
+         return res.status(200).send({message: "The asteroid record has been deleted"})
         })
     }) 
 })
